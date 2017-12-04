@@ -2,15 +2,19 @@ package kul.andya.media.Adapters;
 
 
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.makeramen.roundedimageview.RoundedImageView;
+
 
 import java.util.List;
 
@@ -23,13 +27,16 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MyViewHolder
     private Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public RoundedImageView thumbnail,check;
+        public ImageView thumbnail,check;
+        public TextView shape_text;
 
         public MyViewHolder(View view) {
             super(view);
 
-            thumbnail= (RoundedImageView) view.findViewById(R.id.image);
-            check= (RoundedImageView) view.findViewById(R.id.image2);
+            thumbnail= view.findViewById(R.id.image);
+            check= view.findViewById(R.id.image2);
+            shape_text = view.findViewById(R.id.text_view_shape);
+
         }
     }
     public MediaAdapter(List<String> bitmapList,List<Boolean> selected, Context context) {
@@ -45,15 +52,14 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MyViewHolder
         return new MyViewHolder(itemView);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Glide.with(context).applyDefaultRequestOptions(new RequestOptions().override(153,160).centerCrop().skipMemoryCache(true).dontAnimate()).load("file://"+bitmapList.get(position)).into(holder.thumbnail);
+        Glide.with(context).applyDefaultRequestOptions(new RequestOptions().centerCrop().skipMemoryCache(true).dontAnimate()).load("file://"+bitmapList.get(position)).into(holder.thumbnail);
         if(selected.get(position).equals(true)){
-            holder.check.setVisibility(View.VISIBLE);
-            holder.check.setAlpha(150);
+            holder.shape_text.setBackground(context.getResources().getDrawable(R.drawable.shape_selected));
         }else{
-            holder.check.setVisibility(View.GONE);
-        }
+            holder.shape_text.setBackground(context.getResources().getDrawable(R.drawable.shape_unselected));        }
 
     }
 

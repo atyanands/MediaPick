@@ -42,6 +42,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_check_white_48dp" />
+        android:src="@drawable/ic_check_black_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>
