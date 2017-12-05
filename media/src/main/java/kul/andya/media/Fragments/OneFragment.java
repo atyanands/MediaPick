@@ -51,14 +51,14 @@ public class OneFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_one, container, false);
-        recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
+        recyclerView = v.findViewById(R.id.recycler_view);
         populateRecyclerView();
         return v;
     }
 
     private void populateRecyclerView() {
         mAdapter = new BucketsAdapter(bucketNames,bitmapList,getContext());
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(),3);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(),2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);

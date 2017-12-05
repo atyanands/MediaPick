@@ -1,6 +1,5 @@
 package kul.andya.media.Adapters;
 
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,13 +14,13 @@ import java.util.List;
 
 import kul.andya.media.R;
 
-
-public class MediaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class RecentMediaAdapter
+          extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<String> bitmapList;
     private List<Boolean> selected;
     private Context context;
 
-    public MediaAdapter(List<String> bitmapList, List<Boolean> selected, Context context) {
+    public RecentMediaAdapter(List<String> bitmapList, List<Boolean> selected, Context context) {
         this.bitmapList = bitmapList;
         this.context = context;
         this.selected = selected;
@@ -30,24 +29,23 @@ public class MediaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        RecyclerView.ViewHolder holder = null;
+        RecyclerView.ViewHolder holder;
 
         assert inflater != null;
-        holder = new MyViewHolder(inflater.inflate(R.layout.media_item, parent, false));
+        holder = new MyViewHolder(inflater.inflate(R.layout.recent_media_item, parent, false));
         return holder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final MyViewHolder myViewHolder = (MyViewHolder) holder;
-        Glide.with(context).applyDefaultRequestOptions(new RequestOptions().centerCrop().override(300,300).skipMemoryCache(true).dontAnimate()).load("file://" + bitmapList.get(position)).into(myViewHolder.thumbnail);
+        Glide.with(context).applyDefaultRequestOptions(new RequestOptions().override(300,300).centerCrop().skipMemoryCache(true).dontAnimate()).load("file://" + bitmapList.get(position)).into(myViewHolder.thumbnail);
         if (selected.get(position).equals(true)) {
-            myViewHolder.thumbnail.setPadding(10,10,10,10);
+myViewHolder.thumbnail.setPadding(10,10,10,10);
             myViewHolder.check.setVisibility(View.VISIBLE);
         } else {
-            myViewHolder.thumbnail.setPadding(0,0,0,0);
-
             myViewHolder.check.setVisibility(View.GONE);
+            myViewHolder.thumbnail.setPadding(0,0,0,0);
 
         }
     }

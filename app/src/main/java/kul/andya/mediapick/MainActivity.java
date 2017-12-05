@@ -1,25 +1,20 @@
 package kul.andya.mediapick;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.format.DateFormat;
-import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
-import java.util.Calendar;
-import java.util.Random;
+import kul.andya.media.Gallery;
 
 
 public class MainActivity extends AppCompatActivity {
 
-       DBHelper helper;
+    DBHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,25 +34,28 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this,Gallery.class);
-//                intent.putExtra("title","zing");
-//               startActivityForResult(intent,1);
-                final int random = new Random().nextInt(89998) + 10000;
-                String delegate = "yyyy.MM.dd.hh.mm.ss.AA.MMMM.MMM.EEEE.EE";
-                String a = (String) DateFormat.format(delegate, Calendar.getInstance().getTime());
-
-                Log.e("date",a+random);
-
-                helper.add_new_message("yoo_baby",
-                        "sjdgksdjvgsd",
-                        "yoo baby",
-                        "hfgwkug",
-                        "hfgwkug",
-                        "hfgwkug","hfgwkug","hfgwkug","hfgwkug",
-                        "hfgwkug","hfgwkug","hfgwkug","hfgwkug0",
-                        "hfgwkug","rf4rf4",5,2,5,8,9);
+                Intent intent = new Intent(MainActivity.this, Gallery.class);
+                intent.putExtra("title", "zing");
+                startActivityForResult(intent, 1);
+//                final int random = new Random().nextInt(89998) + 10000;
+//                String delegate = "yyyy.MM.dd.hh.mm.ss.AA.MMMM.MMM.EEEE.EE";
+//                String a = (String) DateFormat.format(delegate, Calendar.getInstance().getTime());
+//
+//                Log.e("date",a+random);
+//
+//                helper.add_new_message("yoo_baby",
+//                        "sjdgksdjvgsd",
+//                        "yoo baby",
+//                        "hfgwkug",
+//                        "hfgwkug",
+//                        "hfgwkug","hfgwkug","hfgwkug","hfgwkug",
+//                        "hfgwkug","hfgwkug","hfgwkug","hfgwkug0",
+//                        "hfgwkug","rf4rf4",5,2,5,8,9);
+//            }
             }
         });
+
+
     }
 
     @Override

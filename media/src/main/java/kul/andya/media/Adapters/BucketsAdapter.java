@@ -30,8 +30,8 @@ public class BucketsAdapter extends RecyclerView.Adapter<BucketsAdapter.MyViewHo
 
         public MyViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.title);
-            thumbnail=(ImageView) view.findViewById(R.id.image);
+            title = view.findViewById(R.id.title);
+            thumbnail= view.findViewById(R.id.image);
         }
     }
 
