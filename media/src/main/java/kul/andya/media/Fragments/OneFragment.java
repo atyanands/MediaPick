@@ -23,6 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import kul.andya.media.Adapters.BucketsAdapter;
+import kul.andya.media.Adapters.GridAutoFitLayoutManager;
 import kul.andya.media.OpenGallery;
 import kul.andya.media.R;
 
@@ -58,7 +59,8 @@ public class OneFragment extends Fragment{
 
     private void populateRecyclerView() {
         mAdapter = new BucketsAdapter(bucketNames,bitmapList,getContext());
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(),2);
+        final int columns = getResources().getInteger(R.integer.gallery_columns);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(),columns);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);

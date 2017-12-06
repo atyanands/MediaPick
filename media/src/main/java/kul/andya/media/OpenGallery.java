@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import kul.andya.media.Adapters.GridAutoFitLayoutManager;
 import kul.andya.media.Adapters.MediaAdapter;
 import kul.andya.media.Fragments.OneFragment;
 import kul.andya.media.Fragments.TwoFragment;
@@ -80,7 +81,8 @@ public class OpenGallery extends AppCompatActivity {
             }
         }
         mAdapter = new MediaAdapter(mediaList,selected,getApplicationContext());
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(),3);
+        final int columns = getResources().getInteger(R.integer.gallery_media_columns);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(),columns);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.getItemAnimator().setChangeDuration(0);
         recyclerView.setAdapter(mAdapter);

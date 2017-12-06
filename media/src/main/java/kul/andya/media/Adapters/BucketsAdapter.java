@@ -2,10 +2,12 @@ package kul.andya.media.Adapters;
 
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,12 +49,29 @@ public class BucketsAdapter extends RecyclerView.Adapter<BucketsAdapter.MyViewHo
 
         return new MyViewHolder(itemView);
     }
+    public static int getScreenWidth() {
+        return Resources.getSystem().getDisplayMetrics().widthPixels;
+    }
+
+    public static int getScreenHeight() {
+        return Resources.getSystem().getDisplayMetrics().heightPixels;
+    }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         bucketNames.get(position);
+
+        final int columns = context.getResources().getInteger(R.integer.gallery_columns);
+        final int size = getScreenWidth()/columns;
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(size,size);
+        params.setMargins(5,5,0,0);
+        holder.thumbnail.setLayoutParams(params);
+
+
+
+
         holder.title.setText(bucketNames.get(position));
-        Glide.with(context).load("file://"+bitmapList.get(position)).apply(new RequestOptions().override(300,300).centerCrop()).into(holder.thumbnail);
+        Glide.with(context).load("file://"+bitmapList.get(position)).apply(new RequestOptions().centerCrop()).into(holder.thumbnail);
     }
 
     @Override

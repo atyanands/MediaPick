@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/atyanands/MediaPick'
     gitUrl = 'https://github.com/atyanands/MediaPick.git'
 
-    libraryVersion = '0.2.7'
+    libraryVersion = '0.5.2'
 
     developerId = 'atyanands'
     developerName = 'Anand Kulkarni'
@@ -66,6 +66,8 @@ dependencies {
     compile "com.android.support:support-core-utils:$supportLibraryVersion"
     compile "com.android.support:recyclerview-v7:$supportLibraryVersion"
     compile "com.android.support:support-vector-drawable:$supportLibraryVersion"
+
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.makeramen:roundedimageview:2.3.0'

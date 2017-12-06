@@ -1,11 +1,15 @@
 package kul.andya.media.Adapters;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -13,7 +17,10 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
+import kul.andya.media.OpenGallery;
 import kul.andya.media.R;
+
+import static java.security.AccessController.getContext;
 
 
 public class MediaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -40,9 +47,19 @@ public class MediaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final MyViewHolder myViewHolder = (MyViewHolder) holder;
-        Glide.with(context).applyDefaultRequestOptions(new RequestOptions().centerCrop().override(300,300).skipMemoryCache(true).dontAnimate()).load("file://" + bitmapList.get(position)).into(myViewHolder.thumbnail);
+        final int columns = context.getResources().getInteger(R.integer.gallery_media_columns);
+
+        final int size = getScreenWidth()/columns;
+
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(size,size);
+        params.setMargins(5,5,0,0);
+        myViewHolder.thumbnail.setLayoutParams(params);
+
+
+
+        Glide.with(context).applyDefaultRequestOptions(new RequestOptions().centerCrop().skipMemoryCache(true).dontAnimate()).load("file://" + bitmapList.get(position)).into(myViewHolder.thumbnail);
         if (selected.get(position).equals(true)) {
-            myViewHolder.thumbnail.setPadding(10,10,10,10);
+            myViewHolder.thumbnail.setPadding(10,10,15,10);
             myViewHolder.check.setVisibility(View.VISIBLE);
         } else {
             myViewHolder.thumbnail.setPadding(0,0,0,0);
@@ -69,5 +86,14 @@ public class MediaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         }
     }
+    public static int getScreenWidth() {
+        return Resources.getSystem().getDisplayMetrics().widthPixels;
+    }
+
+    public static int getScreenHeight() {
+        return Resources.getSystem().getDisplayMetrics().heightPixels;
+    }
+
+
 }
 
