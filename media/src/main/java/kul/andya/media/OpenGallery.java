@@ -102,7 +102,7 @@ public class OpenGallery extends AppCompatActivity {
                 selected.set(position,!selected.get(position));
                 mAdapter.notifyItemChanged(position);
                 if(imagesSelected.size()!=0){
-                    setTitle(String.valueOf(imagesSelected.size()));
+                     setTitle(String.valueOf(imagesSelected.size()));
                 }else{
                     setTitle(Gallery.title);
                 }

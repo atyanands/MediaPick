@@ -61,7 +61,8 @@ public class TwoFragment extends Fragment{
 
     private void populateRecyclerView() {
         mAdapter = new BucketsAdapter(bucketNames,bitmapList,getContext());
-        RecyclerView.LayoutManager mLayoutManager = new GridAutoFitLayoutManager(getContext(),144);
+        final int columns = getResources().getInteger(R.integer.gallery_columns);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(),columns);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
