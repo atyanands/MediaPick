@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
+import kul.andya.media.Gallery;
 import kul.andya.media.OpenGallery;
 import kul.andya.media.R;
 
@@ -32,6 +33,7 @@ public class MediaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.bitmapList = bitmapList;
         this.context = context;
         this.selected = selected;
+
     }
 
     @Override
@@ -45,7 +47,7 @@ public class MediaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         final MyViewHolder myViewHolder = (MyViewHolder) holder;
         final int columns = context.getResources().getInteger(R.integer.gallery_media_columns);
 
@@ -54,18 +56,17 @@ public class MediaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(size,size);
         params.setMargins(5,5,0,0);
         myViewHolder.thumbnail.setLayoutParams(params);
-
+        myViewHolder.check.setLayoutParams(params);
 
 
         Glide.with(context).applyDefaultRequestOptions(new RequestOptions().centerCrop().skipMemoryCache(true).dontAnimate()).load("file://" + bitmapList.get(position)).into(myViewHolder.thumbnail);
         if (selected.get(position).equals(true)) {
-            myViewHolder.thumbnail.setPadding(10,10,15,10);
+         //   myViewHolder.thumbnail.setPadding(10,10,15,10);
             myViewHolder.check.setVisibility(View.VISIBLE);
         } else {
             myViewHolder.thumbnail.setPadding(0,0,0,0);
 
             myViewHolder.check.setVisibility(View.GONE);
-
         }
     }
 
@@ -79,7 +80,6 @@ public class MediaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         public MyViewHolder(View view) {
             super(view);
-
             thumbnail = view.findViewById(R.id.image);
             check = view.findViewById(R.id.image2);
 

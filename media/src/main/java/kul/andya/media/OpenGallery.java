@@ -11,7 +11,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class OpenGallery extends AppCompatActivity {
         });
         toolbar.setNavigationIcon(R.drawable.arrow_back);
         setTitle(Gallery.title);
+
         if(imagesSelected.size()>0){
             setTitle(String.valueOf(imagesSelected.size()));
         }
@@ -112,7 +114,6 @@ public class OpenGallery extends AppCompatActivity {
             }
         }));
     }
-
     public interface ClickListener {
         void onClick(View view, int position);
         void onLongClick(View view, int position);
