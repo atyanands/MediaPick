@@ -11,17 +11,14 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-import kul.andya.media.Adapters.GridAutoFitLayoutManager;
 import kul.andya.media.Adapters.MediaAdapter;
-import kul.andya.media.Fragments.OneFragment;
-import kul.andya.media.Fragments.TwoFragment;
+import kul.andya.media.Fragments.ViewImageFragment;
+import kul.andya.media.Fragments.ViewVideosFragment;
 
 public class OpenGallery extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -30,6 +27,7 @@ public class OpenGallery extends AppCompatActivity {
     public static List<Boolean> selected=new ArrayList<>();
     public static ArrayList<String> imagesSelected=new ArrayList<>();
     public static String parent;
+    public static String type;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,11 +62,11 @@ public class OpenGallery extends AppCompatActivity {
         mediaList.clear();
         selected.clear();
         if(parent.equals("Images")){
-            mediaList.addAll(OneFragment.imagesList);
-            selected.addAll(OneFragment.selected);
+            mediaList.addAll(ViewImageFragment.imagesList);
+            selected.addAll(ViewImageFragment.selected);
         }else{
-            mediaList.addAll(TwoFragment.videosList);
-            selected.addAll(TwoFragment.selected);
+            mediaList.addAll(ViewVideosFragment.videosList);
+            selected.addAll(ViewVideosFragment.selected);
         }
         populateRecyclerView();
     }
@@ -92,10 +90,10 @@ public class OpenGallery extends AppCompatActivity {
             @Override
             public void onClick(View view, int position) {
                 if(!selected.get(position).equals(true)){
-                    imagesSelected.add(mediaList.get(position));
+                    imagesSelected.add(mediaList.get(position)+ "kfhgdfksehrtkdyfcgdkdkbsgfvakhdb"+parent);
                 }else {
                     if(imagesSelected.indexOf(mediaList.get(position))!= -1) {
-                        imagesSelected.remove(imagesSelected.indexOf(mediaList.get(position)));
+                        imagesSelected.remove(imagesSelected.indexOf(mediaList.get(position)+ "kfhgdfksehrtkdyfcgdkdkbsgfvakhdb"+parent));
                     }
                 }
                 Gallery.selectionTitle=imagesSelected.size();

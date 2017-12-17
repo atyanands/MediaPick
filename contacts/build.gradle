@@ -7,14 +7,14 @@ ext {
 
     publishedGroupId = 'com.github.atyanands'
     libraryName = 'MediaPicker'
-    artifact = 'media'
+    artifact = 'contact'
 
     libraryDescription = 'Media Picker for android'
 
     siteUrl = 'https://github.com/atyanands/MediaPick'
     gitUrl = 'https://github.com/atyanands/MediaPick.git'
 
-    libraryVersion = '0.6.9'
+    libraryVersion = '0.0.1'
 
     developerId = 'atyanands'
     developerName = 'Anand Kulkarni'
@@ -71,10 +71,6 @@ dependencies {
 
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.makeramen:roundedimageview:2.3.0'
-
-    compile 'com.nineoldandroids:library:2.4.0'
-    compile 'fr.avianey.com.viewpagerindicator:library:2.4.1@aar'
-
 
     compile 'com.github.bumptech.glide:glide:4.3.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.3.1'

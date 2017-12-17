@@ -43,6 +43,9 @@ dependencies {
     compile "com.google.firebase:firebase-messaging:$fireBaseVersion"
     compile "com.google.firebase:firebase-firestore:$fireBaseVersion"
 
+    compile 'com.nineoldandroids:library:2.4.0'
+
+
 }
 
 

@@ -25,6 +25,10 @@
         <activity
             android:name=".OpenGallery"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ViewImage"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 

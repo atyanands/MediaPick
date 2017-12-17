@@ -27,26 +27,24 @@ import kul.andya.media.Adapters.GridAutoFitLayoutManager;
 import kul.andya.media.OpenGallery;
 import kul.andya.media.R;
 
-
-public class TwoFragment extends Fragment{
+public class OpenCameraFragment extends Fragment{
     private static RecyclerView recyclerView;
     private BucketsAdapter mAdapter;
+    private final String[] projection = new String[]{ MediaStore.Images.Media.BUCKET_DISPLAY_NAME, MediaStore.Images.Media.DATA };
+    private final String[] projection2 = new String[]{MediaStore.Images.Media.DISPLAY_NAME,MediaStore.Images.Media.DATA };
     private List<String> bucketNames= new ArrayList<>();
     private List<String> bitmapList=new ArrayList<>();
-    private final String[] projection = new String[]{ MediaStore.Video.Media.BUCKET_DISPLAY_NAME, MediaStore.Video.Media.DATA };
-    private final String[] projection2 = new String[]{MediaStore.Video.Media.DISPLAY_NAME,MediaStore.Video.Media.DATA };
-    public static List<String> videosList=new ArrayList<>();
+    public static List<String> imagesList= new ArrayList<>();
     public static List<Boolean> selected=new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Bucket names reloaded
-        bucketNames.clear();
         bitmapList.clear();
-        videosList.clear();
-        getVideoBuckets();
-
+        imagesList.clear();
+        bucketNames.clear();
+        getPicBuckets();
     }
 
     @Override
@@ -54,7 +52,7 @@ public class TwoFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_one, container, false);
-        recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
+        recyclerView = v.findViewById(R.id.recycler_view);
         populateRecyclerView();
         return v;
     }
@@ -69,9 +67,9 @@ public class TwoFragment extends Fragment{
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                getVideos(bucketNames.get(position));
+                getPictures(bucketNames.get(position));
                 Intent intent=new Intent(getContext(), OpenGallery.class);
-                intent.putExtra("FROM","Videos");
+                intent.putExtra("FROM","Images");
                 startActivity(intent);
             }
 
@@ -83,41 +81,10 @@ public class TwoFragment extends Fragment{
         mAdapter.notifyDataSetChanged();
     }
 
-    public void getVideos(String bucket){
-        selected.clear();
+    public void getPicBuckets(){
         Cursor cursor = getContext().getContentResolver()
-                .query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, projection2,
-                        MediaStore.Video.Media.BUCKET_DISPLAY_NAME+" =?",new String[]{bucket},MediaStore.Video.Media.DATE_ADDED);
-        ArrayList<String> imagesTEMP = new ArrayList<>(cursor.getCount());
-        HashSet<String> albumSet = new HashSet<>();
-        File file;
-        if (cursor.moveToLast()) {
-            do {
-                if (Thread.interrupted()) {
-                    return;
-                }
-                String path = cursor.getString(cursor.getColumnIndex(projection2[1]));
-                file = new File(path);
-                if (file.exists() && !albumSet.contains(path)) {
-                    imagesTEMP.add(path);
-                    albumSet.add(path);
-                    selected.add(false);
-                }
-            } while (cursor.moveToPrevious());
-        }
-        cursor.close();
-        if (imagesTEMP == null) {
-
-            imagesTEMP = new ArrayList<>();
-        }
-        videosList.clear();
-        videosList.addAll(imagesTEMP);
-    }
-
-    public void getVideoBuckets(){
-        Cursor cursor = getContext().getContentResolver()
-                .query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, projection,
-                        null, null, MediaStore.Video.Media.DATE_ADDED);
+                .query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection,
+                        null, null, MediaStore.Images.Media.DATE_ADDED);
         ArrayList<String> bucketNamesTEMP = new ArrayList<>(cursor.getCount());
         ArrayList<String> bitmapListTEMP = new ArrayList<>(cursor.getCount());
         HashSet<String> albumSet = new HashSet<>();
@@ -145,6 +112,36 @@ public class TwoFragment extends Fragment{
         bitmapList.clear();
         bucketNames.addAll(bucketNamesTEMP);
         bitmapList.addAll(bitmapListTEMP);
+    }
+
+    public void getPictures(String bucket){
+        selected.clear();
+        Cursor cursor = getContext().getContentResolver()
+                .query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection2,
+                        MediaStore.Images.Media.BUCKET_DISPLAY_NAME+" =?",new String[]{bucket},MediaStore.Images.Media.DATE_ADDED);
+        ArrayList<String> imagesTEMP = new ArrayList<>(cursor.getCount());
+        HashSet<String> albumSet = new HashSet<>();
+        File file;
+        if (cursor.moveToLast()) {
+            do {
+                if (Thread.interrupted()) {
+                    return;
+                }
+                String path = cursor.getString(cursor.getColumnIndex(projection2[1]));
+                file = new File(path);
+                if (file.exists() && !albumSet.contains(path)) {
+                    imagesTEMP.add(path);
+                    albumSet.add(path);
+                    selected.add(false);
+                }
+            } while (cursor.moveToPrevious());
+        }
+        cursor.close();
+        if (imagesTEMP == null) {
+            imagesTEMP = new ArrayList<>();
+        }
+        imagesList.clear();
+        imagesList.addAll(imagesTEMP);
     }
 
     public interface ClickListener {
@@ -188,6 +185,11 @@ public class TwoFragment extends Fragment{
 
         @Override
         public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
         }
     }
+
 }
+
+
+

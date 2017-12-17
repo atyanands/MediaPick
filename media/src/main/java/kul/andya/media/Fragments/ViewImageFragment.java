@@ -27,7 +27,7 @@ import kul.andya.media.Adapters.GridAutoFitLayoutManager;
 import kul.andya.media.OpenGallery;
 import kul.andya.media.R;
 
-public class OneFragment extends Fragment{
+public class ViewImageFragment extends Fragment{
     private static RecyclerView recyclerView;
     private BucketsAdapter mAdapter;
     private final String[] projection = new String[]{ MediaStore.Images.Media.BUCKET_DISPLAY_NAME, MediaStore.Images.Media.DATA };
