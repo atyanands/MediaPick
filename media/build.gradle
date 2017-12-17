@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/atyanands/MediaPick'
     gitUrl = 'https://github.com/atyanands/MediaPick.git'
 
-    libraryVersion = '0.6.9'
+    libraryVersion = '0.8.0'
 
     developerId = 'atyanands'
     developerName = 'Anand Kulkarni'

@@ -16,7 +16,6 @@ import android.view.WindowManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import kul.andya.media.Fragments.OpenCameraFragment;
 import kul.andya.media.Fragments.ViewImageFragment;
 import kul.andya.media.Fragments.ViewVideosFragment;
 
@@ -77,7 +76,6 @@ public class Gallery extends AppCompatActivity {
     //This method set up the tab view for images and videos
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OpenCameraFragment(),"Camera");
         adapter.addFragment(new ViewImageFragment(), "Images");
         adapter.addFragment(new ViewVideosFragment(), "Videos");
          viewPager.setAdapter(adapter);

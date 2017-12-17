@@ -28,6 +28,12 @@
         <activity
             android:name=".ViewImage"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".OpenCamera"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".EditImage"
+            android:theme="@style/AppTheme" />
 
     </application>
 
